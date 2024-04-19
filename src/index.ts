@@ -6,7 +6,8 @@ import compression from 'compression';
 import cors from 'cors'
 import dotenv from 'dotenv';
 dotenv.config();
-
+import { dbConnect } from '../src/connection/db';
+dbConnect();
 const app=express();
 
 app.use(cors({
