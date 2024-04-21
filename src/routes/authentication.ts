@@ -1,4 +1,4 @@
-import { register } from '../controller/authentication';
+import { login, register } from '../controller/authentication';
 import express from 'express'
 
 export default (router : express.Router) =>{
@@ -6,4 +6,5 @@ export default (router : express.Router) =>{
         res.send("checking route in authentication.ts");
     })
     router.post('/auth/register',register);
+    router.post('/auth/login',login)
 }

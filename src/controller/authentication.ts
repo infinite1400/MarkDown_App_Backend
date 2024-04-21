@@ -37,3 +37,34 @@ export const register = async (req: express.Request, res: express.Response) => {
     return res.sendStatus(400);
   }
 };
+
+export const login=async(req : express.Request,res : express.Response)=>{
+  try{
+    const {email,password}=req.body;
+    if(!email || !password){
+      return res.status(403).json("All Fields are Mandatory ! ");
+    }
+
+    const existing_user= await findByEmail(email).select('+authentication.salt +authentication.password');
+
+    if(!existing_user){
+      return res.status(403).json('User does not exists! Please Register');
+    }
+
+    const expectedHash=authentication(existing_user.authentication.salt as string,password);
+    if(expectedHash!=existing_user.authentication.password){
+      return res.status(403).json("Password is Wrong ! Enter Correct password !");
+    }
+
+    const salt=random();
+    existing_user.authentication.sessionToken=authentication(salt,existing_user._id.toString());
+    await existing_user.save();
+
+    res.cookie('MARKDOWN-AUTH',existing_user.authentication.sessionToken,{domain : 'localhost' , path : '/'});
+    return res.status(200).json(existing_user).end();
+
+  }catch(error){
+    console.log(error);
+    return res.sendStatus(403);
+  }
+}
