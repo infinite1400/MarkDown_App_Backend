@@ -1,4 +1,4 @@
-import { login, register } from '../controller/authentication';
+import { allUsers, deleteUser, login, register, updateUser } from '../controller/authentication';
 import express from 'express'
 
 export default (router : express.Router) =>{
@@ -7,4 +7,8 @@ export default (router : express.Router) =>{
     })
     router.post('/auth/register',register);
     router.post('/auth/login',login)
+    router.get('/users',allUsers);
+    router.patch('/users/:id',updateUser)
+    router.delete('/users/:id',deleteUser)
+
 }
