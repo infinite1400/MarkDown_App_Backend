@@ -9,6 +9,7 @@ type userTypeWithId = userType & {
 type customRequest = express.Request & {
   user: userTypeWithId;
 };
+
 export const isAuthenticated = async (
   req: customRequest,
   res: express.Response,
@@ -16,7 +17,6 @@ export const isAuthenticated = async (
 ) => {
   try {
     const sessionToken = req.cookies["MARKDOWN-AUTH"];
-    // console.log(sessionToken);
     if (!sessionToken) {
       return res.status(403).json(" sessionToken is not there !");
     }
