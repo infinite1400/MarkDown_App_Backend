@@ -34,3 +34,12 @@ const noteSchema = new mongoose.Schema(
 export const tagModel=mongoose.model<Tag>("tag", tagSchema)
 const noteModel = mongoose.model<Notes>("Notes", noteSchema);
 export default noteModel;
+
+
+export const findTagById=(id : string)=>{
+    return tagModel.findOne({id : id});
+}
+
+export const deleteTagById=(id : string)=>{
+    return tagModel.deleteOne({id : id});
+}
