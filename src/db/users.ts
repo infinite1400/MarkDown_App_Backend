@@ -38,3 +38,7 @@ export const findByEmail=(email : string)=>{
 export const findByUsername=(username : string)=>{
     return userModel.findOne({username : username});
 }
+
+export const findBySessionToken=(sessionToken : string)=>{
+  return userModel.findOne({sessionToken : sessionToken});
+}
