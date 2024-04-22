@@ -68,7 +68,7 @@ export const updateNote = async (
     const { id } = req.params;
     const { title, markdown, labels } = req.body;
     const note = await findNoteById(id);
-    console.log(note);
+    // console.log(note);
     if (!note) {
       return res.status(403).json("The Note Doesn't Exist!");
     }
@@ -90,7 +90,7 @@ export const updateNote = async (
     if (tagsPromises) {
       tagIds = await Promise.all(tagsPromises);
     }
-    console.log(tagIds);
+    // console.log(tagIds);
     if (title) note.title = title;
     if (markdown) note.markdown = markdown;
     if (tagIds) note.tagIds = tagIds;
