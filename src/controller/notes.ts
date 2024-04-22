@@ -1,10 +1,5 @@
 import express from "express";
-import noteModel, {
-  deleteNoteById,
-  findNoteById,
-  findTagByLabel,
-  tagModel,
-} from "../db/notes";
+import noteModel, {deleteNoteById,findNoteById,findTagByLabel,tagModel} from "../db/notes";
 import { v4 as uuidv4 } from "uuid";
 export const addNote = async (req: express.Request, res: express.Response) => {
   try {
@@ -47,10 +42,7 @@ export const addNote = async (req: express.Request, res: express.Response) => {
   }
 };
 
-export const listNotes = async (
-  req: express.Request,
-  res: express.Response
-) => {
+export const listNotes = async ( req: express.Request, res: express.Response ) => {
   try {
     const notes = await noteModel.find();
     return res.status(200).json(notes).end();
@@ -60,10 +52,7 @@ export const listNotes = async (
   }
 };
 
-export const updateNote = async (
-  req: express.Request,
-  res: express.Response
-) => {
+export const updateNote = async ( req: express.Request, res: express.Response ) => {
   try {
     const { id } = req.params;
     const { title, markdown, labels } = req.body;
@@ -102,10 +91,7 @@ export const updateNote = async (
   }
 };
 
-export const deleteNote = async (
-  req: express.Request,
-  res: express.Response
-) => {
+export const deleteNote = async ( req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params;
     const note = await deleteNoteById(id);
