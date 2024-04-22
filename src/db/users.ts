@@ -40,5 +40,5 @@ export const findByUsername=(username : string)=>{
 }
 
 export const findBySessionToken=(sessionToken : string)=>{
-  return userModel.findOne({sessionToken : sessionToken});
+  return userModel.findOne({"authentication.sessionToken" : sessionToken});
 }
